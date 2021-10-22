@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query queryId="sysMenuQuery">
+	<sql>
+		<![CDATA[
+		SELECT  
+		      menu_id as menuId,
+		     (select t.menu_name from sys_menu t  where s.parent_id = t.menu_id ) as parentName,
+				 parent_id,
+		      menu_name as menuName,
+		      menu_icon as menuIcon,
+		      menu_level as menuLevel,
+		      menu_path as menuPath,
+		      sort_flag as sortFlag,
+		      ctr_time as ctrTime,
+		      ctr_id as ctrId,
+		      upd_time as updTime,
+		      upd_id as updId
+		FROM sys_menu s
+		WHERE 1=1
+		 [@parentId; AND parent_id = '{#parentId}' ]
+		 [@menuName; AND menu_name like '%{#menuName}%' ]
+		 order by sort_flag
+		]]>
+		
+	</sql>
+	
+	<table>
+		<head>
+				<td type="checkbox" fixed="left"  />
+<!--		     	<td field="menuId" column="menu_id" title="菜单id" hide="true"></td>-->
+			    <td field="menuName" column="menu_name" title="菜单名" ></td>
+		     	<td field="parentName" column="parentName" title="上级菜单" ></td>
+
+		     	<td field="menuIcon" column="menu_icon" title="菜单icon" ></td>
+		     	<td field="menuLevel" column="menu_level" title="菜单级别,#为父菜单" ></td>
+		     	<td field="menuPath" column="menu_path" title="访问路径" ></td>
+		     	<td field="sortFlag" column="sort_flag" title="排序" ></td>
+		     	<td field="ctrTime" column="ctr_time" title="创建时间" hide="true"></td>
+		     	<td field="ctrId" column="ctr_id" title="创建人id" hide="true"></td>
+		     	<td field="updTime" column="upd_time" title="最后修改时间" hide="true"></td>
+		     	<td field="updId" column="upd_id" title="最后修改人id" hide="true"></td>
+		    	<td  title="操作" templet="#editpane" ></td>
+		</head>
+	</table>
+	
+	
+</query>

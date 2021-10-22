@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!--
+* Created by hbm Generator<27683139@qq.com> on 2021-10-22.
+-->
+<mapper namespace="com.vito.comments.sys.dao.SysMenuDao">
+    <resultMap id="sysmenu" type="com.vito.comments.sys.entity.SysMenu">
+            <id property="menuId" column="menu_id"/>
+            <result property="parentId" column="parent_id"/>
+            <result property="menuName" column="menu_name"/>
+            <result property="menuIcon" column="menu_icon"/>
+            <result property="menuLevel" column="menu_level"/>
+            <result property="menuPath" column="menu_path"/>
+            <result property="sortFlag" column="sort_flag"/>
+            <result property="ctrTime" column="ctr_time"/>
+            <result property="ctrId" column="ctr_id"/>
+            <result property="updTime" column="upd_time"/>
+            <result property="updId" column="upd_id"/>
+    </resultMap>
+
+    <sql id="columns">
+            `menu_id` ,`parent_id` ,`menu_name` ,`menu_icon` ,`menu_level` ,`menu_path` ,`sort_flag` ,`ctr_time` ,`ctr_id` ,`upd_time` ,`upd_id`
+    </sql>
+
+    <insert id="insert">
+    	<selectKey keyProperty="menuId" resultType="string" order="BEFORE">    
+	            select uuid() as id from dual  
+	    </selectKey> 
+        insert into `sys_menu`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+                `menu_id`,
+            </if>
+            <if test="parentId != null">
+                `parent_id`,
+            </if>
+            <if test="menuName != null">
+                `menu_name`,
+            </if>
+            <if test="menuIcon != null">
+                `menu_icon`,
+            </if>
+            <if test="menuLevel != null">
+                `menu_level`,
+            </if>
+            <if test="menuPath != null">
+                `menu_path`,
+            </if>
+            <if test="sortFlag != null">
+                `sort_flag`,
+            </if>
+            <if test="ctrTime != null">
+                `ctr_time`,
+            </if>
+            <if test="ctrId != null">
+                `ctr_id`,
+            </if>
+            <if test="updTime != null">
+                `upd_time`,
+            </if>
+            <if test="updId != null">
+                `upd_id`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+            #{menuId} ,
+            </if>
+            <if test="parentId != null">
+            #{parentId} ,
+            </if>
+            <if test="menuName != null">
+            #{menuName} ,
+            </if>
+            <if test="menuIcon != null">
+            #{menuIcon} ,
+            </if>
+            <if test="menuLevel != null">
+            #{menuLevel} ,
+            </if>
+            <if test="menuPath != null">
+            #{menuPath} ,
+            </if>
+            <if test="sortFlag != null">
+            #{sortFlag} ,
+            </if>
+            <if test="ctrTime != null">
+            #{ctrTime} ,
+            </if>
+            <if test="ctrId != null">
+            #{ctrId} ,
+            </if>
+            <if test="updTime != null">
+            #{updTime} ,
+            </if>
+            <if test="updId != null">
+            #{updId} ,
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        delete from `sys_menu`
+        <trim prefix="where " prefixOverrides="and ">
+            <if test="menuId != null">
+                and `menu_id` = #{menuId}
+            </if>
+            <if test="parentId != null">
+                and `parent_id` = #{parentId}
+            </if>
+            <if test="menuName != null">
+                and `menu_name` = #{menuName}
+            </if>
+            <if test="menuIcon != null">
+                and `menu_icon` = #{menuIcon}
+            </if>
+            <if test="menuLevel != null">
+                and `menu_level` = #{menuLevel}
+            </if>
+            <if test="menuPath != null">
+                and `menu_path` = #{menuPath}
+            </if>
+            <if test="sortFlag != null">
+                and `sort_flag` = #{sortFlag}
+            </if>
+            <if test="ctrTime != null">
+                and `ctr_time` = #{ctrTime}
+            </if>
+            <if test="ctrId != null">
+                and `ctr_id` = #{ctrId}
+            </if>
+            <if test="updTime != null">
+                and `upd_time` = #{updTime}
+            </if>
+            <if test="updId != null">
+                and `upd_id` = #{updId}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByIds">
+        delete from `sys_menu`
+        where `menu_id` in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+        #{id}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update `sys_menu`
+        <set>
+                <if test="parentId != null">
+                    `parent_id` = #{parentId},
+                </if>
+                <if test="menuName != null">
+                    `menu_name` = #{menuName},
+                </if>
+                <if test="menuIcon != null">
+                    `menu_icon` = #{menuIcon},
+                </if>
+                <if test="menuLevel != null">
+                    `menu_level` = #{menuLevel},
+                </if>
+                <if test="menuPath != null">
+                    `menu_path` = #{menuPath},
+                </if>
+                <if test="sortFlag != null">
+                    `sort_flag` = #{sortFlag},
+                </if>
+                <if test="ctrTime != null">
+                    `ctr_time` = #{ctrTime},
+                </if>
+                <if test="ctrId != null">
+                    `ctr_id` = #{ctrId},
+                </if>
+                <if test="updTime != null">
+                    `upd_time` = #{updTime},
+                </if>
+                <if test="updId != null">
+                    `upd_id` = #{updId},
+                </if>
+        </set>
+        where `menu_id` = #{menuId}
+    </update>
+
+    <select id="getById" resultMap="sysmenu">
+        select
+        <include refid="columns" />
+        from `sys_menu`
+        where `menu_id` =  #{id}
+    </select>
+
+    <select id="list" resultMap="sysmenu">
+        select
+        <include refid="columns" />
+        from `sys_menu`
+        <trim prefix="where " prefixOverrides="and ">
+            <if test="menuId != null">
+                and `menu_id` = #{menuId}
+            </if>
+            <if test="parentId != null">
+                and `parent_id` = #{parentId}
+            </if>
+            <if test="menuName != null">
+                and `menu_name` = #{menuName}
+            </if>
+            <if test="menuIcon != null">
+                and `menu_icon` = #{menuIcon}
+            </if>
+            <if test="menuLevel != null">
+                and `menu_level` = #{menuLevel}
+            </if>
+            <if test="menuPath != null">
+                and `menu_path` = #{menuPath}
+            </if>
+            <if test="sortFlag != null">
+                and `sort_flag` = #{sortFlag}
+            </if>
+            <if test="ctrTime != null">
+                and `ctr_time` = #{ctrTime}
+            </if>
+            <if test="ctrId != null">
+                and `ctr_id` = #{ctrId}
+            </if>
+            <if test="updTime != null">
+                and `upd_time` = #{updTime}
+            </if>
+            <if test="updId != null">
+                and `upd_id` = #{updId}
+            </if>
+        </trim>
+    </select>
+
+    <select id="listMenu" resultMap="sysmenu">
+        select
+        <include refid="columns" />
+        from `sys_menu`
+        <trim prefix="where " prefixOverrides="and ">
+            <if test="menuId != null">
+                and `menu_id` = #{menuId}
+            </if>
+            <if test="parentId != null">
+                and `parent_id` = #{parentId}
+            </if>
+            <if test="menuName != null">
+                and `menu_name` = #{menuName}
+            </if>
+            <if test="menuIcon != null">
+                and `menu_icon` = #{menuIcon}
+            </if>
+            <if test="menuLevel != null">
+                and `menu_level` = #{menuLevel}
+            </if>
+            <if test="menuPath != null">
+                and `menu_path` = #{menuPath}
+            </if>
+            <if test="sortFlag != null">
+                and `sort_flag` = #{sortFlag}
+            </if>
+            <if test="ctrTime != null">
+                and `ctr_time` = #{ctrTime}
+            </if>
+            <if test="ctrId != null">
+                and `ctr_id` = #{ctrId}
+            </if>
+            <if test="updTime != null">
+                and `upd_time` = #{updTime}
+            </if>
+            <if test="updId != null">
+                and `upd_id` = #{updId}
+            </if>
+        </trim>
+    </select>
+</mapper>

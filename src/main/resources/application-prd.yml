@@ -1,0 +1,70 @@
+#debug : true
+
+spring:
+  datasource:
+    url: jdbc:mysql://rm-9vc3w15o9187iqa86.mysql.rds.ltops.gzdata.com.cn:3306/guizhou_upms_api?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: guizhou
+    password: Hzyl2020
+  redis:
+    password: bjhz2021
+    cluster:
+      nodes: 10.60.148.87:9001,10.60.148.87:9002,10.60.148.87:9003,10.60.148.87:9004,10.60.148.87:9005,10.60.148.87:9006
+    database: 0
+  mail:
+    host: smtp.qq.com
+    username: 772977181@qq.com
+    password: kyouvdvunledbcei
+    protocol: smtp
+    default-encoding: UTF-8
+    port: 465
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+
+
+# 打印sql
+logging:
+  path: /hda3/tomcat_js/logs
+
+
+pros:
+  filesavepath: /hda3/tomcat_js/file_js
+  serverIp: http://61.243.1.244:8011
+# ca
+caUrl:  https://58.42.231.108:5001
+caUserName: SGGZY_YPCG
+
+#银行url
+bankUrl: http://70.1.0.32:8008/OAP/common/gateway/v1/scs/SCS0111033/1.0.0
+
+#银行基本信息
+bank:
+  bankName: 贵州银行股份有限公司贵阳展览馆支行
+  bankCode: 313701099123
+  serverUrl: http://70.1.0.32:8008/OAP/common/gateway/v1/scs
+  appId: "00870215"
+  privateKey: 83b5f3c3389720c3510dc5f10b5b5f4d49c0c7a9e7087c48edaf6aecfb78c0df
+  fopPublicKey: 049693743f3485dc9fc5d7d9507302473e74853c688f6bdacf43c4674f581201cefaf436dda962bf331bbb5139eb9d5cf481aa890705d6a487cac892e9dd4bc130
+  superAccNo: "0136001900000041"
+  superAccName: 贵州省公共资源交易中心
+
+
+#是否必须使用ca登录
+loginCa: true;
+
+#是否强制修改密码
+checkEdiePass: true
+
+#是否验证发票真伪
+checkTbInvoiceYes: true
+
+#是否验证登录验证码
+checkAnswer: true
+
+
+
+

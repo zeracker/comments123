@@ -1,0 +1,124 @@
+#debug : true
+
+spring:
+  mvc :
+    favicon :
+      enabled : false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    type : com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    logSlowSql: true
+  redis:
+    timeout: 6000ms
+  devtools:
+    restart:
+      enabled: true
+      poll-interval: 3000ms
+      quiet-period: 2999ms
+
+
+
+  mail:
+    host: smtp.qq.com
+    username: 772977181@qq.com
+    password: kyouvdvunledbcei
+    protocol: smtp
+    default-encoding: UTF-8
+    port: 465
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+
+
+
+  http:
+
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+mapper:
+  mappers:
+  #  - tk.mybatis.mapper.common.Mapper
+  #not-empty: false
+  #identity: MYSQL
+
+#公共配置与profiles选择无关
+mybatis:
+  #typeAliasesPackage: com.hsnn.bankPay.entity
+  mapperLocations: classpath:com/vito/comments/mapper/**/*.xml
+
+# 打印sql
+logging:
+  path: d:\logs
+  level:
+    root: info  #低于info级别的就不显示  TRACE < DEBUG < INFO < WARN < ERROR
+    springboot.hello : debug
+
+
+
+# 分页配置jedis
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+pros:
+  pakage : com.hsnn.bankPay.query
+  #  filesavepath: /root/images
+  #  serverIp: http://61.243.10.48:901
+  filesavepath : d:/images
+  serverIp : http://127.0.0.1:8080
+  #不加入日志的方法
+  exceptionLog : "sysCodeService-getAllCode,queryService-queryById,sysResourceService-getResourcetree,sysResourceService-getMyResource,tbInvoicedetailScService-modifyDetail,\
+  tbPaymainService-payTransactionPayment,sysUserService-checkUserEmail,sysActionLogDicService-add,tbPaymainService-payTransactionPayment,tbPaymainService-payTransactionPaymentHealth\
+  ,baseImgannexService-del,tbPaymainService-rankingHosPay,tbPaymainService-payTransactionPaymentHealth,tbPaymainService-rankingHosPay\
+  ,tbPaymainService-payTransactionPaymentHealth,tbPaymainService-rankingHosPay,tbPaymainService-payTransactionPaymentHealth,tbPaymainService-rankingHosPay,sysSmsMessageService-msgAdd,\
+  tradeInvoiceimgService-del,queryService-exportById,tbPaydetailsService-gatchkFirstVote"
+  menuandname :  analysis-结算分析,jwdl-境外产品国内总代理,role-角色管理,user-用户管理
+# ca
+caUrl:  https://58.42.231.108:5001
+caUserName: SGGZY_YPCG
+
+#银行测试url
+bankUrl : http://222.85.178.210:8008/oba/gateway/v1/scs/SCS0111033/1.0.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
